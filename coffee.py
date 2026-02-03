@@ -5,30 +5,37 @@
 # Amount due is calculated by subtracting the balance from 75
 # The system should crash if a string is entered to the coin variable (fixed now)
 
+def getCoin():
+    coin = input("Insert 75p: (50p, 20p, 10p, 5p) ")
+
+    if coin == "50" or coin == "20" or coin == "10" or coin == "5":
+        coin = int(coin)
+    else:
+        print("Invalid")
+        coin = 0
+
+    return coin
+
+def updateTotal(due, coin):
+    total = due - coin
+    print("Due: ", total)
+    return total
+
+def dispenseProduct(due):
+    change = 0 - due
+    print("Change: ", change)
+    print("Dispensing coffee...")
+    print("Have a nice day! ")
 
 def main():
-    balance = 0
+    due = 75
 
-    while balance < 75:
-        coin = input("Insert 75p: (50p, 20p, 10p, 5p)")
+    while due > 0:
+        coin = getCoin()
+        due = updateTotal(due, coin)
 
-        if coin == "50" or coin == "20" or coin == "10" or coin == "5":
-            coin = int(coin)
-            balance = balance + coin
-            due = 75 - balance
+    dispenseProduct(due)
         
-        else:
-            print("Invalid coin, refunding... ")
-
-        print("Amount due: ", due)
-        print("Balance: ", balance)
-
-    change = balance - 75
-
-    print("Change: ", change)
-    print("Dispensing change... ")
-
-    print("Preparing coffee...")
 
 
 main()
